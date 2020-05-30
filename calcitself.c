@@ -6,7 +6,7 @@
 
 double calculate(char* expression) {
 	clear_spaces(expression);
-	unsigned position = 0; // переменная для обработки символов в выражении
+	unsigned position = 0; // ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї Г®ГЎГ°Г ГЎГ®ГІГЄГЁ Г±ГЁГ¬ГўГ®Г«Г®Гў Гў ГўГ»Г°Г Г¦ГҐГ­ГЁГЁ
 	return add_and_sub(expression, &position);
 }
 
@@ -37,7 +37,7 @@ double add_and_sub(char* expression, unsigned *position) {
 
 double mult_and_div(char* expression, unsigned *position) {
 	double answer = power_and_brackets(expression, position);
-	double divide = 0.0; // переменная для проверки деления на ноль
+	double divide = 0.0; // ГЇГҐГ°ГҐГ¬ГҐГ­Г­Г Гї Г¤Г«Гї ГЇГ°Г®ГўГҐГ°ГЄГЁ Г¤ГҐГ«ГҐГ­ГЁГї Г­Г  Г­Г®Г«Гј
 	while (expression[*position] == '*' || expression[*position] == '/') {
 		switch (expression[*position])
 		{
@@ -48,7 +48,7 @@ double mult_and_div(char* expression, unsigned *position) {
 		case '/':
 			++*position;
 			divide = power_and_brackets(expression, position);
-			if (divide == 0.0) puts("ERROR: Division by 0\n"); // проверка деления на ноль
+			if (divide == 0.0) puts("ERROR: Division by 0\n"); // ГЇГ°Г®ГўГҐГ°ГЄГ  Г¤ГҐГ«ГҐГ­ГЁГї Г­Г  Г­Г®Г«Гј
 			else answer /= divide;
 			break;
 		}
@@ -64,7 +64,7 @@ double power_and_brackets(char* expression, unsigned *position) {
 		++*position;
 		sign = -1;
 	}
-	if (expression[*position] == '(') { // поиск подвыражений в скобках
+	if (expression[*position] == '(') { // ГЇГ®ГЁГ±ГЄ ГЇГ®Г¤ГўГ»Г°Г Г¦ГҐГ­ГЁГ© Гў Г±ГЄГ®ГЎГЄГ Гµ
 		++*position;
 		answer = add_and_sub(expression, position);
 		/*if (expression[*position] != ')') puts(" ERROR: Brackets");*/
@@ -87,14 +87,14 @@ double get_numbers(char* expression, unsigned *position) {
 		sign = -1;
 	}
 	while (isdigit(expression[*position])) {
-		answer = answer * 10.0 + (expression[*position] - 48); //получение числа 
+		answer = answer * 10.0 + (expression[*position] - 48); //ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ Г·ГЁГ±Г«Г  
 		++*position;
 	}
-	if (expression[*position] == '.') { //получение десятичной части числа
+	if (expression[*position] == '.') { //ГЇГ®Г«ГіГ·ГҐГ­ГЁГҐ Г¤ГҐГ±ГїГІГЁГ·Г­Г®Г© Г·Г Г±ГІГЁ Г·ГЁГ±Г«Г 
 		++*position;
 		while (isdigit(expression[*position])) {
 			answer = answer + (expression[*position] - 48) / decimal_part;
-			decimal_part *= 100;
+			decimal_part *= 10.0;
 			++*position;
 		}
 	}
