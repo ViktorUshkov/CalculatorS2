@@ -37,7 +37,6 @@ double add_and_sub(char* expression, unsigned *position) {
 
 double mult_and_div(char* expression, unsigned *position) {
 	double answer = power_and_brackets(expression, position);
-	double divide = 0.0; // ïåðåìåííàÿ äëÿ ïðîâåðêè äåëåíèÿ íà íîëü
 	while (expression[*position] == '*' || expression[*position] == '/') {
 		switch (expression[*position])
 		{
@@ -47,9 +46,7 @@ double mult_and_div(char* expression, unsigned *position) {
 			break;
 		case '/':
 			++*position;
-			divide = power_and_brackets(expression, position);
-			if (divide == 0.0) puts("ERROR: Division by 0\n"); // ïðîâåðêà äåëåíèÿ íà íîëü
-			else answer /= divide;
+			answer /= power_and_brackets(expression, position);
 			break;
 		}
 	}
@@ -67,7 +64,6 @@ double power_and_brackets(char* expression, unsigned *position) {
 	if (expression[*position] == '(') { // ïîèñê ïîäâûðàæåíèé â ñêîáêàõ
 		++*position;
 		answer = add_and_sub(expression, position);
-		/*if (expression[*position] != ')') puts(" ERROR: Brackets");*/
 		++*position;
 	}
 	else answer = get_numbers(expression, position);
